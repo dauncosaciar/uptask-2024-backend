@@ -14,5 +14,4 @@ export const handleInputErrors = (
   }
 
   next();
-  return;
 };
