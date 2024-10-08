@@ -31,3 +31,17 @@ export async function taskExists(
     res.status(500).json({ error: "Hubo un error" });
   }
 }
+
+export function taskBelongsToProject(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  if (req.task.project.toString() !== req.project.id.toString()) {
+    const error = new Error("La tarea no pertenece al proyecto");
+    res.status(400).json({ error: error.message });
+    return;
+  }
+
+  next();
+}
