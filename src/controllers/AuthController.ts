@@ -113,4 +113,42 @@ export class AuthController {
       res.status(500).json({ error: "Hubo un error" });
     }
   };
+
+  static requestConfirmationCode = async (req: Request, res: Response) => {
+    try {
+      const { email } = req.body;
+      const user = await User.findOne({ email });
+
+      // Check if user exists
+      if (!user) {
+        const error = new Error("El Usuario con este email no está registrado");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+
+      // Check if user is already registered
+      if (user.confirmed) {
+        const error = new Error("El Usuario con este email ya está registrado");
+        res.status(403).json({ error: error.message });
+        return;
+      }
+
+      // Generate token for the new user
+      const token = new Token();
+      token.token = generate6DigitsToken();
+      token.user = user.id;
+
+      // Send email
+      AuthEmail.sendConfirmationEmail({
+        email: user.email,
+        name: user.name,
+        token: token.token
+      });
+
+      await Promise.allSettled([user.save(), token.save()]);
+      res.send("Se envió un nuevo token a tu email");
+    } catch (error) {
+      res.status(500).json({ error: "Hubo un error" });
+    }
+  };
 }
