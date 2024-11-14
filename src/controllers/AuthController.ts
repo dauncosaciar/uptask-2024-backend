@@ -164,7 +164,7 @@ export class AuthController {
         return;
       }
 
-      // Generate token for the new user
+      // Generate token for user
       const token = new Token();
       token.token = generate6DigitsToken();
       token.user = user.id;
