@@ -103,7 +103,7 @@ export class AuthController {
       const isPasswordCorrect = await checkPassword(password, user.password);
 
       if (!isPasswordCorrect) {
-        const error = new Error("Password incorrecto");
+        const error = new Error("Contraseña incorrecta");
         res.status(401).json({ error: error.message });
         return;
       }
@@ -195,7 +195,7 @@ export class AuthController {
         return;
       }
 
-      res.send("Token válido, define tu nuevo password");
+      res.send("Token válido, define tu nueva contraseña");
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
