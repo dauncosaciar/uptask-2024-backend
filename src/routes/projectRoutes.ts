@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { body, param } from "express-validator";
+import { authenticate } from "../middlewares/auth";
 import { handleInputErrors } from "../middlewares/validation";
 import { projectExists } from "../middlewares/project";
 import { taskBelongsToProject, taskExists } from "../middlewares/task";
@@ -11,6 +12,7 @@ const router = Router();
 // Routes for Projects
 router.post(
   "/",
+  authenticate,
   body("projectName")
     .trim()
     .notEmpty()
