@@ -9,10 +9,11 @@ import { TaskController } from "../controllers/TaskController";
 
 const router = Router();
 
+router.use(authenticate);
+
 // Routes for Projects
 router.post(
   "/",
-  authenticate,
   body("projectName")
     .trim()
     .notEmpty()
@@ -29,7 +30,7 @@ router.post(
   ProjectController.createProject
 );
 
-router.get("/", authenticate, ProjectController.getAllProjects);
+router.get("/", ProjectController.getAllProjects);
 
 router.get(
   "/:id",

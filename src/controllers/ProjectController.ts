@@ -38,6 +38,12 @@ export class ProjectController {
         return;
       }
 
+      if (project.manager.toString() !== req.user.id.toString()) {
+        const error = new Error("Acción no válida, no creaste este proyecto");
+        res.status(401).json({ error: error.message });
+        return;
+      }
+
       res.json(project);
     } catch (error) {
       console.log(error);
