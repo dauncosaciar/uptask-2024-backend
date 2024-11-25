@@ -66,9 +66,9 @@ router.delete(
   ProjectController.deleteProject
 );
 
-// Routes for Tasks
 router.param("projectId", projectExists);
 
+// Routes for Tasks
 router.post(
   "/:projectId/tasks",
   body("name")
@@ -131,6 +131,13 @@ router.post(
   body("email").isEmail().toLowerCase().withMessage("Email no válido"),
   handleInputErrors,
   TeamController.findMemberByEmail
+);
+
+router.post(
+  "/:projectId/team",
+  body("id").isMongoId().withMessage("ID no válido"),
+  handleInputErrors,
+  TeamController.addMemberById
 );
 
 export default router;
