@@ -3,7 +3,11 @@ import { body, param } from "express-validator";
 import { authenticate } from "../middlewares/auth";
 import { handleInputErrors } from "../middlewares/validation";
 import { projectExists } from "../middlewares/project";
-import { taskBelongsToProject, taskExists } from "../middlewares/task";
+import {
+  hasAuthorization,
+  taskBelongsToProject,
+  taskExists
+} from "../middlewares/task";
 import { ProjectController } from "../controllers/ProjectController";
 import { TaskController } from "../controllers/TaskController";
 import { TeamController } from "../controllers/TeamController";
@@ -71,6 +75,7 @@ router.param("projectId", projectExists);
 // Routes for Tasks
 router.post(
   "/:projectId/tasks",
+  hasAuthorization,
   body("name")
     .trim()
     .notEmpty()
@@ -97,6 +102,7 @@ router.get(
 
 router.put(
   "/:projectId/tasks/:taskId",
+  hasAuthorization,
   param("taskId").isMongoId().withMessage("ID de tarea no válido"),
   body("name")
     .trim()
@@ -112,6 +118,7 @@ router.put(
 
 router.delete(
   "/:projectId/tasks/:taskId",
+  hasAuthorization,
   param("taskId").isMongoId().withMessage("ID de tarea no válido"),
   handleInputErrors,
   TaskController.deleteTask
