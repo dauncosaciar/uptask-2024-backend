@@ -8,6 +8,7 @@ La siguiente se trata de una API o Backend realizado para una App denominada _**
 
    - Registro.
    - Login.
+   - Roles en los Proyectos (`Manager` o `Colaborador`)
 
 2. Proyectos:
 
