@@ -33,6 +33,10 @@ Las tecnologías utilizadas para realizar esta aplicación son las siguientes:
 
 `Node.js` / `Express` / `MongoDB` / `Mongoose` / `Nodemon` / `TypeScript`
 
+## Referencia al Frontend
+
+Puedes ver la información del Frontend de UpTask en [https://github.com/dauncosaciar/uptask-2024-frontend](https://github.com/dauncosaciar/uptask-2024-frontend)
+
 ---
 
 PROYECTO REALIZADO DESDE EL CURSO DE UDEMY: [React y TypeScript - La Guía Completa Creando +10 Proyectos](https://www.udemy.com/course/react-de-principiante-a-experto-creando-mas-de-10-aplicaciones/)
